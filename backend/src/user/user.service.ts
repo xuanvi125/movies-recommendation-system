@@ -4,6 +4,7 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { SignUpDTO } from './dto/SignUpDTO';
 import { hash } from 'bcrypt';
+import EmailAlreadyExistsException from 'src/exceptions/EmailAlreadyExistsException';
 
 @Injectable()
 export class UserService {
@@ -16,7 +17,7 @@ export class UserService {
     const { email, password } = signUpDTO;
     const existingUser = await this.userModel.findOne({ email });
     if (existingUser) {
-      return null;
+      throw new EmailAlreadyExistsException();
     }
 
     signUpDTO.password = await hash(password, 12);

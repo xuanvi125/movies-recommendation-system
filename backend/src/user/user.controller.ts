@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Body,
   Controller,
   Get,
@@ -13,6 +14,7 @@ import { SignUpDTO } from './dto/SignUpDTO';
 import { AuthGuard } from 'src/common/guards/auth.guard';
 import { User } from './schemas/user.schema';
 import { Request } from 'express';
+import EmailAlreadyExistsException from 'src/exceptions/EmailAlreadyExistsException';
 
 @Controller('user')
 export class UserController {
@@ -20,19 +22,18 @@ export class UserController {
 
   @Post('register')
   async create(@Body() signUpDTO: SignUpDTO) {
-    const user = await this.userService.create(signUpDTO);
-    if (!user) {
+    try {
+      const user = await this.userService.create(signUpDTO);
       return {
-        statusCode: 400,
-        error: 'Bad Request',
-        message: 'Email already exists',
+        statusCode: 201,
+        message: 'User created successfully',
+        data: user,
       };
+    } catch (err) {
+      if (err instanceof EmailAlreadyExistsException) {
+        throw new BadRequestException('Email already exists');
+      }
     }
-    return {
-      statusCode: 201,
-      message: 'User created successfully',
-      data: user,
-    };
   }
   @Get('profile')
   @UseGuards(AuthGuard)
