@@ -14,7 +14,7 @@ export default function Home() {
       const oldToken = localStorage.getItem("token");
       if (!oldToken && token) {
           localStorage.setItem("token", token);
-          window.location.href = "/";
+          window.location.href = "/movies-recommendation-system/";
       }
     }, [token]);
 
