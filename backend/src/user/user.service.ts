@@ -32,4 +32,21 @@ export class UserService {
   async getProfile(email: String) {
     return await this.userModel.findOne({ email });
   }
+
+  async createGoogleUser(email: string, name: string, googleId: String) {
+    const existingUser = await this.userModel.findOne({email});
+    if (existingUser) {
+      throw new EmailAlreadyExistsException();
+    }
+    const newUser = {
+      email,
+      name,
+      googleId
+    };
+
+    const user = new this.userModel(newUser);
+    await user.save();
+    user.password = undefined;
+    return user;
+  }
 }

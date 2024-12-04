@@ -1,15 +1,23 @@
-import React from "react";
 import {
-  Navbar,
-  MobileNav,
   Typography,
-  Button,
-  IconButton,
   Card,
 } from "@material-tailwind/react";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import NavBar from "../components/NavBar";
 
 export default function Home() {
+    const { search } = useLocation();
+    const queryParams = new URLSearchParams(search);
+    const token = queryParams.get('token');
+    useEffect(() => {
+      const oldToken = localStorage.getItem("token");
+      if (!oldToken && token) {
+          localStorage.setItem("token", token);
+          window.location.href = "/";
+      }
+    }, [token]);
+
   return (
     <div className="-m-6 max-h-[768px] w-[calc(100%+48px)] overflow-scroll">
       <NavBar />

@@ -31,3 +31,7 @@ export async function getProfile() {
   });
   return await response.json();
 }
+
+export function logInWithGoogle() {
+    window.location.href = `${API_URL}/auth/google/login`;
+}
