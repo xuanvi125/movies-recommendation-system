@@ -26,6 +26,8 @@ jobs:
         run: |
             cd client/
             npm run build
+        env:
+          VITE_API_URL: ${{ secrets.VITE_API_URL }}
 
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v3
