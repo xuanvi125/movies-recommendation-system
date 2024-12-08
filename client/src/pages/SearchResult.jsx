@@ -51,9 +51,9 @@ function SearchResult() {
       <div className="flex flex-col items-center">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {isLoading && <p>Loading...</p>}
-          {movies.length === 0 && <p>No movies found</p>}
+          {movies?.length === 0 && <p>No movies found</p>}
           {!isLoading &&
-            movies.map((movie) => <MovieCard key={movie.id} movie={movie} />)}
+            movies?.map((movie) => <MovieCard key={movie.id} movie={movie} />)}
         </div>
         <div className="mb-5">
           <Pagination totalPages={totalPages} />
