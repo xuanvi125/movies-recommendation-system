@@ -3,7 +3,6 @@ import React from "react";
 const MovieCard = ({ movie }) => {
   const { title, poster_path, release_date, overview } = movie;
   const poster = `https://image.tmdb.org/t/p/w500${poster_path}`;
-  console.log(overview);
   return (
     <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white">
       <img className="w-full " src={poster} alt={title} />
