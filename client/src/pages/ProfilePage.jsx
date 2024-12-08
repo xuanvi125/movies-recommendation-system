@@ -1,12 +1,11 @@
 import { Card, Input, Typography } from "@material-tailwind/react";
-import NavBar from "../components/NavBar";
+import NavBar from "../components/Header";
 import { useAuth } from "../contexts/AuthContext";
 
 function ProfilePage() {
   const { user } = useAuth();
   return (
     <div className="-m-6  w-[calc(100%+48px)] ">
-      <NavBar />
       <div className="mx-auto max-w-screen-md py-12">
         <Typography variant="h2" color="blue-gray" className="mb-2">
           USER PROFILE PAGE

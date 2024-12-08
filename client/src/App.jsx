@@ -6,20 +6,26 @@ import { Toaster } from "react-hot-toast";
 import ProtectedRoute from "./utils/ProtectRoute";
 import GuestRoute from "./utils/GuestRoute";
 import ProfilePage from "./pages/ProfilePage";
+import AppLayout from "./pages/layout/AppLayout";
+import SearchResult from "./pages/SearchResult";
 
 function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Home />} />
         <Route
-          path="/profile"
+          path="/"
           element={
             <ProtectedRoute>
-              <ProfilePage />
+              <AppLayout />
             </ProtectedRoute>
           }
-        />
+        >
+          <Route index element={<Home />} />
+          <Route path="/search" element={<SearchResult />} />
+          <Route path="/profile" element={<ProfilePage />} />
+        </Route>
+
         <Route
           path="/sign-up"
           element={
