@@ -19,15 +19,16 @@ jobs:
 
       - name: Install dependencies
         run: |
-            cd client/
-            npm install
+          cd client/
+          npm install
 
       - name: Build project
         run: |
-            cd client/
-            npm run build
+          cd client/
+          npm run build
         env:
           VITE_API_URL: ${{ secrets.VITE_API_URL }}
+          VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
 
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v3
@@ -56,4 +57,3 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./client/dist
-
