@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-import Banner from "../components/Banner";
+import { TrendingMovies } from "../components/TrendingMovies";
 
 export default function Home() {
   const { search } = useLocation();
@@ -17,9 +17,7 @@ export default function Home() {
 
   return (
     <div>
-      <p className="text-white bg-[#082f49] h-screen">
-        Home Page - Trending Movies
-      </p>
+      <TrendingMovies  />
     </div>
   );
 }

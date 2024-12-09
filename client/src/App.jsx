@@ -8,6 +8,7 @@ import GuestRoute from "./utils/GuestRoute";
 import ProfilePage from "./pages/ProfilePage";
 import AppLayout from "./pages/layout/AppLayout";
 import SearchResult from "./pages/SearchResult";
+import { PageNotFound } from "./pages/PageNotFound";
 
 function App() {
   return (
@@ -16,9 +17,7 @@ function App() {
         <Route
           path="/"
           element={
-            <ProtectedRoute>
               <AppLayout />
-            </ProtectedRoute>
           }
         >
           <Route index element={<Home />} />
@@ -42,7 +41,7 @@ function App() {
             </GuestRoute>
           }
         />
-        <Route path="*" element={<p>Page Not Found</p>} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
       <Toaster position="top-center" />
     </>
