@@ -23,11 +23,10 @@ const CircularProgressBar = ({ percentage, radius = 50, strokeWidth = 8 }) => {
             cx={viewBoxSize / 2}
             cy={viewBoxSize / 2}
             r={radius}
-            fill="none"
-            stroke="rgba(255, 255, 255, 0.1)"
+            fill="black"
+            stroke="rgba(255, 255, 255, 1)"
             strokeWidth={strokeWidth}
           />
-          
           <circle
             cx={viewBoxSize / 2}
             cy={viewBoxSize / 2}
@@ -39,6 +38,7 @@ const CircularProgressBar = ({ percentage, radius = 50, strokeWidth = 8 }) => {
             strokeDashoffset={offset}
             strokeLinecap="round"
           />
+
         </svg>
 
         <div className="absolute inset-0 flex items-center justify-center">
@@ -49,5 +49,5 @@ const CircularProgressBar = ({ percentage, radius = 50, strokeWidth = 8 }) => {
         </div>
       </div>
     );
-  };
+};
 export {CircularProgressBar};

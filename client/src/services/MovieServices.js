@@ -13,3 +13,17 @@ export async function getTrendingMovies(day = 'day') {
     );
     return await response.json();
 }   
+
+export async function getMovieDetail(movieId) {
+    const response = await fetch(
+        `https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}`
+    );
+    return await response.json();
+}
+
+export async function getCreditsFromMovieId(movieId) {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${API_KEY}`
+  );
+  return await response.json();
+}

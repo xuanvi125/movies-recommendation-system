@@ -3,12 +3,12 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Home from "./pages/Home";
 import { Toaster } from "react-hot-toast";
-import ProtectedRoute from "./utils/ProtectRoute";
 import GuestRoute from "./utils/GuestRoute";
 import ProfilePage from "./pages/ProfilePage";
 import AppLayout from "./pages/layout/AppLayout";
 import SearchResult from "./pages/SearchResult";
 import { PageNotFound } from "./pages/PageNotFound";
+import MovieDetail from "./pages/MovieDetail.jsx";
 
 function App() {
   return (
@@ -21,6 +21,7 @@ function App() {
           }
         >
           <Route index element={<Home />} />
+          <Route path="/movie/:id" element={<MovieDetail />} />
           <Route path="/search" element={<SearchResult />} />
           <Route path="/profile" element={<ProfilePage />} />
         </Route>

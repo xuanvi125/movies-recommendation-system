@@ -1,5 +1,4 @@
-import { Card, Input, Typography } from "@material-tailwind/react";
-import NavBar from "../components/Header";
+import { Input, Typography } from "@material-tailwind/react";
 import { useAuth } from "../contexts/AuthContext";
 
 function ProfilePage() {
