@@ -1,17 +1,18 @@
 import {Link, useSearchParams} from "react-router-dom";
 import MovieCard from "../components/MovieCard";
 import { useEffect, useState } from "react";
+import { Loading } from "../components/Loading";
 import Pagination from "../components/Pagination";
 import * as MovieServices from "../services/MovieServices";
 function SearchResult() {
   const [isLoading, setIsLoading] = useState(false);
-  const [movies, setMovies] = useState([1, 2, 3, 4, 5, 6]);
+  const [movies, setMovies] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     const search = searchParams.get("query") || null;
-    const page = searchParams.get("page") || 1;
+    const page = +searchParams.get("page") || 1;
     async function fetchMovies() {
       setIsLoading(true);
       const response = await MovieServices.searchMovies(
@@ -23,6 +24,7 @@ function SearchResult() {
     }
 
     if (search) {
+      window.scrollTo(0, 0);
       fetchMovies();
     }
   }, [searchParams]);
@@ -50,7 +52,7 @@ function SearchResult() {
       </div>
       <div className="flex flex-col items-center">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {isLoading && <p>Loading...</p>}
+          {isLoading && <Loading />}
           {movies?.length === 0 && <p>No movies found</p>}
           {!isLoading &&
             movies?.map((movie) =>

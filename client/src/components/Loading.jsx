@@ -21,3 +21,5 @@ export default function Loading() {
     </div>
   );
 }
+
+export { Loading };

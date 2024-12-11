@@ -7,7 +7,7 @@ return (
                     style={{ width: '300px', height: 'auto', margin: '20px auto' }} />
             <h2>Sorry, the page you are looking for does not exist.</h2>
             <div>
-                <div className="font-medium text-primary-600 dark:text-primary-500">
+                <div className="font-medium text-primary-600 dark:text-primary-500 mb-4">
                     Go back to <Link to="/" className="hover:underline font-bold text-blue-600">Home</Link>
                 </div>
             </div>

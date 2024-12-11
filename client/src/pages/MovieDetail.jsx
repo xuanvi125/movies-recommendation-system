@@ -3,6 +3,8 @@ import {Link, useParams} from "react-router-dom";
 import {getCreditsFromMovieId, getMovieDetail} from "../services/MovieServices.js";
 import {CircularProgressBar} from "../components/CircleProgessBar.jsx";
 import {ListButton, HeartButton, BookmarkButton} from "../components/MovieButton"
+import Loading from "../components/Loading.jsx";
+import { PageNotFound } from "./PageNotFound.jsx";
 
 export default function MovieDetail() {
   const { id } = useParams();
@@ -15,11 +17,14 @@ export default function MovieDetail() {
       let promise = getMovieDetail(id);
       promise.then((data) => setMovie(data));
     };
+
     const getCredits = async () => {
       let promise = getCreditsFromMovieId(id);
       promise.then((data) => {
+        if (!data.crew) return;
+
         let allCrews = data.crew
-        let groupedCrews = allCrews.reduce((acc, member) => {
+        let groupedCrews = allCrews?.reduce((acc, member) => {
           if (!acc[member.name]) {
             acc[member.name] = {
               name: member.name,
@@ -45,7 +50,10 @@ export default function MovieDetail() {
     getCredits();
   }, [id]);
 
-  if (!movie) return <div>Loading...</div>;
+  if (!movie) return <Loading />;
+
+  if (movie.success === false) 
+    return <PageNotFound />;
 
   return (
     <div
@@ -75,7 +83,7 @@ export default function MovieDetail() {
             <h2 className="w-full m-0 p-0 text-[36px] font-semibold leading-none">
               {movie.title}
               <span className="opacity-80 font-normal pl-[8px]">
-                {`(${movie.release_date.split('-')[0]})`}
+                {`(${movie.release_date?.split('-')[0]})`}
               </span>
             </h2>
             <div>
