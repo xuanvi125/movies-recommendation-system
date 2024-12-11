@@ -50,7 +50,10 @@ function SearchResult() {
           </div>
         </div>
       </div>
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col">
+        <h3 className="font-bold text-xl mb-3">
+                Search results for &quot;{searchParams.get("query")}&quot;
+        </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {isLoading && <Loading />}
           {movies?.length === 0 && <p>No movies found</p>}

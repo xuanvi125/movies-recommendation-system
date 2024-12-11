@@ -15,7 +15,10 @@ export default function Header() {
   };
 
   const [query, setQuery] = useState('');
-
+  const handleSearch = () => {
+    navigate(`/search?query=${query}`);
+    setQuery('');
+  }
   return (
     <header className="bg-[#082f49] h-[60px]  flex items-center justify-between p-4 px-10">
       <div className="text-white text-lg font-semibold">
@@ -29,10 +32,11 @@ export default function Header() {
             <input
                 className="w-full bg-black placeholder:text-gray-400 text-white text-sm border border-gray-700 rounded-md pl-3 pr-28 py-2 transition duration-300 ease focus:outline-none focus:border-gray-500 hover:border-gray-600 shadow-sm focus:shadow"
                 placeholder="Movie name..."
+                value={query}
                 onChange={(e) => setQuery(e.target.value)} 
-                onKeyDown={(e) => e.key === 'Enter' && navigate(`/search?query=${query}`)}
+                onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
             />
-            <Link to={`/search?query=${query}`}
+            <button onClick={handleSearch}
                 className="absolute top-1 right-1 flex 
                             items-center rounded bg-gray-700 py-1 px-2.5
                             text-sm text-white transition-all 
@@ -41,7 +45,7 @@ export default function Header() {
                 type="submit"
             >
                 Search <MagnifyingGlassIcon className="w-4 h-4 ml-2"/>
-            </Link> 
+            </button> 
         </div>
 
 
