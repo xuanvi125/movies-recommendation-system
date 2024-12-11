@@ -55,7 +55,7 @@ function SearchResult() {
           {!isLoading &&
             movies?.map((movie) =>
               <Link to={`/movie/${movie.id}`} key={movie.id}>
-                <MovieCard movie={movie} />
+                <MovieCard movie={movie} key={movie.id} />
               </Link>
             )
           }
