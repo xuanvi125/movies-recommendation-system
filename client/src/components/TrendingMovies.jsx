@@ -5,23 +5,31 @@ import { Link } from "react-router-dom";
 import { getTrendingMovies } from "../services/MovieServices";
 import { ToggleButton } from "./ToggleButton";
 import { CircularProgressBar } from "./CircleProgessBar";
+import { Loading } from "./Loading";
 
 const tabs = [{name: 'Today', value: 'day'}, {name: 'This Week', value: 'week'}];
 
 export function TrendingMovies() {
     const [movies, setMovies] = useState([]);
     const [activeTab, setActiveTab] = useState(tabs[0]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        setLoading(true);
         const movies = getTrendingMovies(activeTab.value);
-        movies.then((data) => setMovies(data.results.slice(0, 14)));
+        movies.then((data) => {
+            setMovies(data.results.slice(0, 14));
+            setLoading(false);
+        });
     }, [activeTab]);
 
 return (
+    
     <div className="mx-4 my-4">
         <ToggleButton activeTab={activeTab} setActiveTab={setActiveTab} tabs={tabs} />
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7">
+        {loading && <Loading />}
+        {!loading && <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7">
             {movies.map((movie) => (
                 <div key={movie.id} className="m-[6px] group">
                     <Link to={`/movie/${movie.id}`}>
@@ -43,7 +51,7 @@ return (
                     </Link>
                 </div>
             ))}
-        </div>
+        </div>}
     </div>
 );
 }
