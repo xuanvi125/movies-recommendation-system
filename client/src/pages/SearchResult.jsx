@@ -1,4 +1,4 @@
-import { useSearchParams } from "react-router-dom";
+import {Link, useSearchParams} from "react-router-dom";
 import MovieCard from "../components/MovieCard";
 import { useEffect, useState } from "react";
 import Pagination from "../components/Pagination";
@@ -53,7 +53,12 @@ function SearchResult() {
           {isLoading && <p>Loading...</p>}
           {movies?.length === 0 && <p>No movies found</p>}
           {!isLoading &&
-            movies?.map((movie) => <MovieCard key={movie.id} movie={movie} />)}
+            movies?.map((movie) =>
+              <Link to={`/movie/${movie.id}`} key={movie.id}>
+                <MovieCard movie={movie} />
+              </Link>
+            )
+          }
         </div>
         <div className="mb-5">
           <Pagination totalPages={totalPages} />
