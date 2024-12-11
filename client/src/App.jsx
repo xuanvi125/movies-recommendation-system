@@ -8,6 +8,7 @@ import ProfilePage from "./pages/ProfilePage";
 import AppLayout from "./pages/layout/AppLayout";
 import SearchResult from "./pages/SearchResult";
 import { PageNotFound } from "./pages/PageNotFound";
+import ProtectRoute from "./utils/ProtectRoute";
 import MovieDetail from "./pages/MovieDetail.jsx";
 
 function App() {
@@ -23,7 +24,12 @@ function App() {
           <Route index element={<Home />} />
           <Route path="/movie/:id" element={<MovieDetail />} />
           <Route path="/search" element={<SearchResult />} />
-          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/profile" element={
+                    <ProtectRoute>
+                        <ProfilePage />
+                    </ProtectRoute>
+                }
+          />
         </Route>
 
         <Route
